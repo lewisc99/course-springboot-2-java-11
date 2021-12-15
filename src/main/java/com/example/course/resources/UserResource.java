@@ -23,7 +23,7 @@ public class UserResource {
 	private UserService service;
 	
 	@GetMapping //create a get method
-	public ResponseEntity<List<User>> finAll()
+	public ResponseEntity<List<User>> findAll()
 	{
 		
 		List<User> list = service.findAll();

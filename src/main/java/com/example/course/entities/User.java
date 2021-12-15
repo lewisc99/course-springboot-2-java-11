@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity // import javax.persistence.Entity; we must always give preference to the specification
 @Table(name = "tb_user")
@@ -25,7 +27,7 @@ public class User implements Serializable{
 	private String phone;
 	private String password;
 	
-	
+	@JsonIgnore //to stop the lop
 	@OneToMany(mappedBy = "client") // has mapped by Client( in user class)
 	//if was collection, need to added only the get and not set.
 	private List<Order> orders =  new ArrayList<>();
