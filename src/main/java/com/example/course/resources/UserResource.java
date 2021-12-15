@@ -13,7 +13,9 @@ import com.example.course.entities.User;
 @RequestMapping(value = "/users")
 public class UserResource {
 	
-	@GetMapping
+	
+	
+	@GetMapping //create a get method
 	public ResponseEntity<User> finAll()
 	{
 		User u = new User(1L,"maria","maria@gmail.com","999999","12345");
