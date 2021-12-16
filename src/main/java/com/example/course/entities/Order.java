@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.example.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 
@@ -30,6 +31,10 @@ public class Order implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
 	private Instant moment;
 	
+	
+	//in the database will save as a integer.
+	private Integer orderStatus;
+	
 	@ManyToOne //because this is a foreign key that has many to one Client.
 	@JoinColumn(name = "client_id") //name that will show in the database
 	private User client;
@@ -41,11 +46,13 @@ public class Order implements Serializable {
 		
 	}
 	
-	public Order(Long id, Instant moment, User client)
+	public Order(Long id, Instant moment, User client, OrderStatus orderStatus)
 	{
 		this.id = id;
 		this.moment = moment;
 		this.client = client;
+		 setOrderStatus(orderStatus); //in the parameter of the constructor will pass
+		 // a orderStatus enum, but calling the setOrderStatus, will return the orderStatus integer.
 	}
 
 	public Long getId() {
@@ -70,6 +77,23 @@ public class Order implements Serializable {
 
 	public void setClient(User client) {
 		this.client = client;
+	}
+	
+	
+	//return a orderstatus Integer as a string.
+	public OrderStatus getOrderStatus()
+	{
+		return OrderStatus.valueOf(orderStatus);
+	}
+	
+	//pass a parater a OrderStatus, and get the code (integer of the OrderStatus passed in the parameter.
+	public void setOrderStatus(OrderStatus orderStatus)
+	{
+		if (orderStatus != null)
+		{
+			this.orderStatus = orderStatus.getCode();
+
+		}
 	}
 
 	@Override
