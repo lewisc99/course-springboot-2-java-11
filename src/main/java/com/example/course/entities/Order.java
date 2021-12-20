@@ -46,7 +46,7 @@ public class Order implements Serializable {
 	private User client;
 	
 	
-	@OneToMany(mappedBy = "id.order")
+	@OneToMany(mappedBy = "id.order") //because OrderItemPK has a property order.
 	private Set<OrderItem> items = new HashSet<>();
 	
 	public Order()
