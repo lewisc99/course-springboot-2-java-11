@@ -9,11 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name =  "tb_product")
@@ -30,8 +32,13 @@ public class Product  implements Serializable{
 	private String imgUrl;
 	
 	//set instead of list because each Product has Only One category
+
+
+	@JsonIgnore
 	
-	@Transient
+	@JoinTable(name = "tb_product_category",
+	joinColumns = @JoinColumn(name = "product_id"),
+	inverseJoinColumns = @JoinColumn (name = "category_id") )
 	private Set<Category> categories = new HashSet<>();
 			//set it's interface
 	
