@@ -27,4 +27,13 @@ public class UserService {
 		
 		return obj.get(); //will return the object inside the optional.
 	}
+	
+	
+	public User insert(User obj)
+	{
+		return repository.save(obj);
+		//for pattern return the save obj.
+	}
+	
+	
 }
