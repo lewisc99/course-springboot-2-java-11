@@ -21,6 +21,10 @@ import com.example.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 
+
+//all the gets will appear in the postman
+//exemple getPayment will appear like Payment.
+
 @Entity
 @Table(name = "tb_order") //to change the name of the table in the database
 public class Order implements Serializable {
@@ -128,6 +132,20 @@ public class Order implements Serializable {
 
 	public void setPayment(Payment payment) {
 		this.payment = payment;
+	}
+	
+	
+	
+
+	public Double getTotal()
+	{
+		double sum = 0.0;
+		
+		for (OrderItem x : items)
+		{
+			sum  = sum + x.getSubTotal();
+		}
+		return sum;
 	}
 
 	@Override
