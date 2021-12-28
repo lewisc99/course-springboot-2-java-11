@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.course.entities.User;
 import com.example.course.repositories.UserRepository;
+import com.example.course.services.exceptions.ResourceNotFoundException;
 
 
 @Service //to be inject in the controller.
@@ -25,7 +26,10 @@ public class UserService {
 	{
 		Optional<User> obj = repository.findById(id);
 		
-		return obj.get(); //will return the object inside the optional.
+	//	return obj.get(); //will return the object inside the optional.
+		return  obj.orElseThrow(() -> new ResourceNotFoundException(id));			//if doesn't have user will return a exception
+	
+	
 	}
 	
 	
@@ -61,5 +65,7 @@ public class UserService {
 		entity.setPhone(obj.getPhone());
 		
 	}
+	
+	
 	
 }
